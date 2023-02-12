@@ -1,12 +1,15 @@
 const PORT = 3000;
 
-const express = require('express');
-const app = express();
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('./server/config/io')(server);
 
 app.get('/', (req, res) => {
-    res.send('Hi');
+    res.sendFile(__dirname + '/client/index.html');
 });
 
-app.listen(PORT, () => {
+// app.set('io', io);
+
+server.listen(PORT, () => {
     console.log('Server Listening on PORT', PORT);
 });
